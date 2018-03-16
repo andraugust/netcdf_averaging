@@ -1,5 +1,5 @@
 # Description
-There are several netcdf files in `data/`.  Each file contains time-series of several environmental variables.  Use `main.py` to time-average some of these variables and save to output file in `avg_data/`. Time averages are averaged across files.
+This project contains a script for time-averaging data in netcdf files.  Averaging is performed on each netcdf file in `data/` and then the individual file-averages are averaged, creating a final result that's saved to `avg_data/`.
 
 # Requirements
 - For running `netCDF4`
