@@ -17,6 +17,7 @@ d_new.createDimension('time')
 
 
 # initialize variables and copy metadata
+print('Copying metadata...')
 d_old = Dataset('./input_data/sgpmetE13.b1.20180101.000000.cdf')
 for old_name, new_name in zip(old_names,new_names):
     v_old = d_old.variables[old_name]
@@ -34,6 +35,7 @@ dummy_arr_dict = {x:np.array([]) for x in new_names}
 # loop files
 for f in os.listdir('./input_data'):
     if not f.endswith('.cdf'): continue
+    print('Computing time-average for '+f)
     f = os.path.join('input_data', f)
     d_old = Dataset(f)
     # loop variables
@@ -45,9 +47,12 @@ for f in os.listdir('./input_data'):
             dummy_arr_dict[new_name] += get_time_avg(v_old)
 
 # average over files and assign to Dataset
+print('Averaging over files...')
 nfiles = 5
 for new_name in new_names:
     d_new[new_name][:] = dummy_arr_dict[new_name]/nfiles
 
 
 d_new.close()
+
+print('Done.')
